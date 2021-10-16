@@ -1,0 +1,232 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Sources">
+      <UniqueIdentifier>{11061be1-b873-42a9-8531-8529f8d98e06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers">
+      <UniqueIdentifier>{5694af1a-d437-4657-9417-323109a21c84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AirVolume">
+      <UniqueIdentifier>{255ef68f-67e2-4058-9401-ecff0ab9a829}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="API">
+      <UniqueIdentifier>{fe957a21-a446-4297-9765-cd6c8f4be540}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common">
+      <UniqueIdentifier>{0d43b0c3-d38d-4dd0-b8bb-5ace6d2f262d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mandibular">
+      <UniqueIdentifier>{814b2a70-82a0-44fd-855d-ff24cbcf1d0a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Sources\common.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\consoleHelpers.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\DicomImage.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\DicomSeries.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\GrayImage.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\helpers.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Presets.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\RgbImage.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\VtkRender.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\VtkRenderSync.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\vtkScrollImageViewerInteractorStyle.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="AirVolume\AirVolumeAlgorithm.cpp">
+      <Filter>AirVolume</Filter>
+    </ClCompile>
+    <ClCompile Include="AirVolume\AirVolumeSkeletonPartitioningFilter.cpp">
+      <Filter>AirVolume</Filter>
+    </ClCompile>
+    <ClCompile Include="AirVolume\AirVolumeSkeletonSimplificationFilter.cpp">
+      <Filter>AirVolume</Filter>
+    </ClCompile>
+    <ClCompile Include="AirVolume\MinimalCrossSectionFinder.cpp">
+      <Filter>AirVolume</Filter>
+    </ClCompile>
+    <ClCompile Include="API\BimaxProcessingAPI.cpp">
+      <Filter>API</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\AllPathsBFS.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\BinaryImageToSymmetryPlane.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\DicomProcessing.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\itkBinaryThinningImageFilter3D.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\LaplacianPointsSmoothener.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\MinimalPathDijkstra.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\PointsToLineLeastSquaresAlgorithm.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\PointsToLineLeastSquaresAlgorithm3D.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\SkeletonToGraphFilter.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Mandibular\MandibularBaseAlgorithm.cpp">
+      <Filter>Mandibular</Filter>
+    </ClCompile>
+    <ClCompile Include="Mandibular\MandibularBoneToCondylesAlgorithm.cpp">
+      <Filter>Mandibular</Filter>
+    </ClCompile>
+    <ClCompile Include="Mandibular\MandibularCondylesAlgorithm.cpp">
+      <Filter>Mandibular</Filter>
+    </ClCompile>
+    <ClCompile Include="Mandibular\NasionPointExtractor.cpp">
+      <Filter>Mandibular</Filter>
+    </ClCompile>
+    <ClCompile Include="Mandibular\RamusContoursToNotchLineAlgorithm.cpp">
+      <Filter>Mandibular</Filter>
+    </ClCompile>
+    <ClCompile Include="Mandibular\RamusContoursToRamusLineAlgorithm.cpp">
+      <Filter>Mandibular</Filter>
+    </ClCompile>
+    <ClCompile Include="Mandibular\ZygomaticArchPointsExtractor.cpp">
+      <Filter>Mandibular</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Headers\common.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Headers\consoleHelpers.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Headers\Converters.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Headers\DicomImage.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Headers\DicomSeries.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Headers\GrayImage.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Headers\helpers.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Headers\itkCommon.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Headers\Presets.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Headers\RgbImage.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Headers\VtkRender.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Headers\VtkRenderSync.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Headers\vtkScrollImageViewerInteractorStyle.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="AirVolume\AirVolumeAlgorithm.h">
+      <Filter>AirVolume</Filter>
+    </ClInclude>
+    <ClInclude Include="AirVolume\AirVolumeSkeletonPartitioningFilter.h">
+      <Filter>AirVolume</Filter>
+    </ClInclude>
+    <ClInclude Include="AirVolume\AirVolumeSkeletonSimplificationFilter.h">
+      <Filter>AirVolume</Filter>
+    </ClInclude>
+    <ClInclude Include="AirVolume\MinimalCrossSectionFinder.h">
+      <Filter>AirVolume</Filter>
+    </ClInclude>
+    <ClInclude Include="API\BimaxProcessingAPI.h">
+      <Filter>API</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\AllPathsBFS.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\BinaryImageToSymmetryPlane.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\DicomProcessing.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Graph3D.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\itkBinaryThinningImageFilter3D.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\LaplacianPointsSmoothener.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\MinimalPathDijkstra.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\PointsToLineLeastSquaresAlgorithm.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\PointsToLineLeastSquaresAlgorithm3D.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\SkeletonToGraphFilter.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Mandibular\MandibularBaseAlgorithm.h">
+      <Filter>Mandibular</Filter>
+    </ClInclude>
+    <ClInclude Include="Mandibular\MandibularBoneToCondylesAlgorithm.h">
+      <Filter>Mandibular</Filter>
+    </ClInclude>
+    <ClInclude Include="Mandibular\MandibularCondylesAlgorithm.h">
+      <Filter>Mandibular</Filter>
+    </ClInclude>
+    <ClInclude Include="Mandibular\MandibularPartialAlgorithms.h">
+      <Filter>Mandibular</Filter>
+    </ClInclude>
+    <ClInclude Include="Mandibular\NasionPointExtractor.h">
+      <Filter>Mandibular</Filter>
+    </ClInclude>
+    <ClInclude Include="Mandibular\RamusContoursToNotchLineAlgorithm.h">
+      <Filter>Mandibular</Filter>
+    </ClInclude>
+    <ClInclude Include="Mandibular\RamusContoursToRamusLineAlgorithm.h">
+      <Filter>Mandibular</Filter>
+    </ClInclude>
+    <ClInclude Include="Mandibular\ZygomaticArchPointsExtractor.h">
+      <Filter>Mandibular</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

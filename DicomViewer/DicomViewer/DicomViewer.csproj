@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DicomViewer.Lib\DicomViewer.Lib.csproj" />
+    <ProjectReference Include="..\DicomViewer.UI\DicomViewer.UI.csproj" />
+  </ItemGroup>
+
+</Project>

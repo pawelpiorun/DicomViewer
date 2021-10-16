@@ -1,0 +1,155 @@
+﻿<UserControl x:Class="DicomViewer.UI.Controls.AirVolumeFlatSurfaceResult"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="clr-namespace:DicomViewer.UI.Controls"
+             xmlns:conv="clr-namespace:DicomViewer.UI.Converters"
+             x:Name="This">
+    <FrameworkElement.Resources>
+        <ResourceDictionary>
+
+            <conv:BooleanNotToVisibilityConverter x:Key="BoolNotVisConv" />
+
+        </ResourceDictionary>
+    </FrameworkElement.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- YZ -->
+        <Grid Grid.Column="0"
+              Grid.Row="0">
+            <controls:VtkRenderWindow x:Name="SliceYZ"
+                                      RenderContent="{Binding DicomSeries}"
+                                      RenderType="FlatYZ"
+                                      RenderSync="{Binding ElementName=This, Path=Sync}"
+                                      ShowResliceCursors="{Binding ShowResliceCursors}"/>
+        </Grid>
+
+        <Grid Grid.Column="0"
+              Grid.Row="1"
+              Visibility="{Binding ShowResliceCursors, Converter={StaticResource BoolNotVisConv}}">
+            <Slider Minimum="0"
+                    Maximum="{Binding ElementName=SliceYZ, Path=MaxSliceIndex}"
+                    MaxHeight="100"
+                    Interval="1"
+                    Height="20"
+                    Value="{Binding ElementName=SliceYZ, Path=SliceIndex}"
+                    IsSelectionRangeEnabled="True"
+                    SelectionStart="0"
+                    SelectionEnd="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Value}"/>
+        </Grid>
+
+        <!-- XZ -->
+        <Grid Grid.Column="1"
+              Grid.Row="0">
+            <controls:VtkRenderWindow x:Name="SliceXZ"
+                                      RenderContent="{Binding DicomSeries}"
+                                      RenderType="FlatXZ"
+                                      RenderSync="{Binding ElementName=This, Path=Sync}"
+                                      ShowResliceCursors="{Binding ShowResliceCursors}" />
+        </Grid>
+
+        <Grid Grid.Column="1"
+              Grid.Row="1"
+              Visibility="{Binding ShowResliceCursors, Converter={StaticResource BoolNotVisConv}}">
+            <Slider Minimum="0"
+                    Maximum="{Binding ElementName=SliceXZ, Path=MaxSliceIndex}"
+                    MaxHeight="100"
+                    Interval="1"
+                    Height="20"
+                    Value="{Binding ElementName=SliceXZ, Path=SliceIndex}"
+                    IsSelectionRangeEnabled="True"
+                    SelectionStart="0"
+                    SelectionEnd="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Value}" />
+        </Grid>
+
+        <!-- XY -->
+        <Grid Grid.Column="1"
+              Grid.Row="2">
+
+            <controls:VtkRenderWindow x:Name="SliceXY"
+                                      RenderContent="{Binding DicomSeries}"
+                                      RenderType="FlatXY"
+                                      RenderSync="{Binding ElementName=This, Path=Sync}"
+                                      ShowResliceCursors="{Binding ShowResliceCursors}"/>
+        </Grid>
+
+        <Grid Grid.Column="1"
+              Grid.Row="3"
+              Visibility="{Binding ShowResliceCursors, Converter={StaticResource BoolNotVisConv}}">
+            <Slider Minimum="0"
+                    Maximum="{Binding ElementName=SliceXY, Path=MaxSliceIndex}"
+                    MaxHeight="100"
+                    Interval="1"
+                    Height="20"
+                    Value="{Binding ElementName=SliceXY, Path=SliceIndex}"
+                    IsSelectionRangeEnabled="True"
+                    SelectionStart="0"
+                    SelectionEnd="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Value}" />
+        </Grid>
+
+        <Grid Grid.Column="0"
+              Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <TextBlock HorizontalAlignment="Right"
+                       VerticalAlignment="Top"
+                       Margin="5"
+                       FontWeight="Bold"
+                       FontSize="14"
+                       Grid.Column="1">
+                <Run Text="Value:" />
+                <Run Text="{Binding AirVolumeResult.CurrentMinimalSection}" />
+                <Run Text="mm" /> <Run Text="2" Typography.Variants="Superscript" />
+            </TextBlock>
+            <controls:PlotControl DataContext="{Binding AirVolumeResult.PlotViewModel}"
+                                  Grid.ColumnSpan="2" />
+
+
+            <StackPanel HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Grid.Column="1"
+                        Visibility="{Binding AirVolumeResult.PlotViewModel.HasAnyPoints, Converter={StaticResource BoolNotVisConv}}">
+
+                <Button Margin="5"
+                        Padding="10,5"
+                        Content="Simulate"
+                        Command="{Binding AirVolumeResult.SimulatePlotCommand}"
+                        Visibility="{Binding AirVolumeResult.IsAlpha, Converter={StaticResource BoolVis}}" />
+
+            </StackPanel>
+            
+            <TextBlock Grid.Column="0"
+                       Grid.Row="1"
+                       Text="Index:"
+                       Margin="15,0,10,5"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Center" />
+
+            <Slider Grid.Row="1"
+                    Grid.Column="1"
+                    Minimum="0"
+                    Maximum="{Binding AirVolumeResult.SectionsMaxIndex}"
+                    MaxHeight="100"
+                    Interval="1"
+                    Height="25"
+                    VerticalAlignment="Center"
+                    Value="{Binding AirVolumeResult.CurrentSectionIndex, Mode=TwoWay}" />
+        </Grid>
+
+    </Grid>
+</UserControl>

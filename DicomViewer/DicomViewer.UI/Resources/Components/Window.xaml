@@ -1,0 +1,239 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:views="clr-namespace:DicomViewer.UI.Views">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/DicomViewer.UI;component/Resources/Components/Button.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <Geometry x:Key="EyeGeometry">M8.75,2.999L8.093,3.406 7.812,4.374 8.070,5.343 8.75,5.750 9.406,5.343 9.687,4.374 9.406,3.406 8.75,2.999z M7.687,1.374L5.874,1.749 5.625,4.125 5.875,5.984 6.554,7.515 7.549,8.554 8.75,8.937 9.976,8.563 10.968,7.539 11.632,6.010 11.875,4.125 11.437,1.687 9.624,1.374 10.531,2.539 10.874,4.312 10.226,6.617 9.530,7.309 8.687,7.562 7.844,7.309 7.148,6.617 6.674,5.584 6.499,4.312 6.835,2.562 7.687,1.374z M9.437,0L13.164,0.656 16.187,2.437 16.750,2.937 17.073,3.259 17.882,4.109 20,6.687 19.777,6.989 19.203,7.742 17.562,9.687 16.812,10.5 15.318,11.618 13.531,12.554 11.556,13.198 9.500,13.437 6.213,12.959 3.414,11.632 1.282,9.614 0,7.062 1.720,9.109 3.828,10.687 6.240,11.703 8.875,12.062 11.627,11.679 14.117,10.593 16.266,8.898 18.000,6.687 15.734,3.960 12.812,2.124 13.000,4.062 12.669,6.571 11.765,8.617 10.416,9.995 8.75,10.5 7.110,9.995 5.757,8.617 4.838,6.571 4.500,4.062 4.687,2.187 2.085,3.953 0,6.375 1.281,3.823 3.406,1.804 6.187,0.477 9.437,0z</Geometry>
+
+    <Style x:Key="WindowStyle"
+           TargetType="views:WindowBase">
+        <Setter Property="Foreground"
+                Value="Black" />
+        <Setter Property="BorderBrush"
+                Value="Black" />
+        <Setter Property="BorderThickness"
+                Value="0" />
+        <Setter Property="Width"
+                Value="800" />
+        <Setter Property="Height"
+                Value="640" />
+        <Setter Property="ResizeMode"
+                Value="CanResizeWithGrip" />
+        <Setter Property="UseLayoutRounding"
+                Value="True" />
+        <Setter Property="Background"
+                Value="White" />
+        <Setter Property="Margin"
+                Value="0" />
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="views:WindowBase">
+
+                    <Border x:Name="WindowBorder"
+                            Margin="0">
+
+                        <Border BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="0">
+                            <AdornerDecorator>
+                                <Grid x:Name="LayoutRoot"
+                                      Background="White">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Border Grid.Row="0"
+                                            Grid.ColumnSpan="4"
+                                            Height="50"
+                                            Background="Black" />
+
+                                    <!--  LOGO  -->
+                                    <Viewbox Grid.Row="0"
+                                             Grid.Column="0"
+                                             Margin="8,0"
+                                             VerticalAlignment="Center"
+                                             Width="20"
+                                             Height="20">
+                                        <Path Fill="White"
+                                              Data="{StaticResource EyeGeometry}" />
+                                    </Viewbox>
+
+                                    <!--  TITLE  -->
+                                    <TextBlock Grid.Row="0"
+                                               Grid.Column="1"
+                                               VerticalAlignment="Center"
+                                               Foreground="White"
+                                               FontSize="14"
+                                               Text="{TemplateBinding Title}" />
+
+                                    <!--  SUBTITLE  -->
+                                    <TextBlock Grid.Row="0"
+                                               Grid.Column="0"
+                                               Grid.ColumnSpan="4"
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Center"
+                                               Foreground="White"
+                                               FontSize="12"
+                                               Text="{TemplateBinding SubTitle}" />
+
+                                    <StackPanel Grid.Row="0"
+                                                Grid.Column="2"
+                                                VerticalAlignment="Top"
+                                                Orientation="Horizontal"
+                                                WindowChrome.IsHitTestVisibleInChrome="True">
+                                        <Button Command="{Binding Source={x:Static SystemCommands.MinimizeWindowCommand}}"
+                                                ToolTip="Minimize"
+                                                Style="{StaticResource SystemButton}">
+                                            <Button.Content>
+                                                <Grid Width="30"
+                                                      Height="23">
+                                                    <Path Width="8"
+                                                          Height="7"
+                                                          HorizontalAlignment="Center"
+                                                          VerticalAlignment="Center"
+                                                          Data="M0,6 L8,6 Z"
+                                                          Stroke="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"
+                                                          StrokeThickness="2" />
+                                                </Grid>
+                                            </Button.Content>
+                                        </Button>
+                                        <Grid Margin="1,0,1,0">
+                                            <Button x:Name="Restore"
+                                                    Command="{Binding Source={x:Static SystemCommands.RestoreWindowCommand}}"
+                                                    Style="{StaticResource SystemButton}"
+                                                    ToolTip="Restore"
+                                                    Visibility="Collapsed">
+                                                <Button.Content>
+                                                    <Grid Width="30"
+                                                          Height="23"
+                                                          RenderTransform="1,0,0,1,.5,.5"
+                                                          UseLayoutRounding="True">
+                                                        <Path Width="8"
+                                                              Height="8"
+                                                              HorizontalAlignment="Center"
+                                                              VerticalAlignment="Center"
+                                                              Data="M2,0 L8,0 L8,6 M0,3 L6,3 M0,2 L6,2 L6,8 L0,8 Z"
+                                                              Stroke="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"
+                                                              StrokeThickness="1" />
+                                                    </Grid>
+                                                </Button.Content>
+                                            </Button>
+                                            <Button x:Name="Maximize"
+                                                    Command="{Binding Source={x:Static SystemCommands.MaximizeWindowCommand}}"
+                                                    ToolTip="Maximize"
+                                                    Style="{StaticResource SystemButton}">
+                                                <Button.Content>
+                                                    <Grid Width="30"
+                                                          Height="23">
+                                                        <Path Width="9"
+                                                              Height="8"
+                                                              HorizontalAlignment="Center"
+                                                              VerticalAlignment="Center"
+                                                              Data="M0,1 L9,1 L9,8 L0,8 Z"
+                                                              Stroke="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"
+                                                              StrokeThickness="2" />
+                                                    </Grid>
+                                                </Button.Content>
+                                            </Button>
+                                        </Grid>
+                                        <Button Command="{Binding Source={x:Static SystemCommands.CloseWindowCommand}}"
+                                                ToolTip="Close"
+                                                Style="{StaticResource SystemButton}">
+                                            <Button.Content>
+                                                <Grid Width="30"
+                                                      Height="23"
+                                                      RenderTransform="1,0,0,1,0,1">
+                                                    <Path Width="8"
+                                                          Height="7"
+                                                          HorizontalAlignment="Center"
+                                                          VerticalAlignment="Center"
+                                                          Data="M0,0 L8,7 M8,0 L0,7 Z"
+                                                          Stroke="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"
+                                                          StrokeThickness="1.5" />
+                                                </Grid>
+                                            </Button.Content>
+                                        </Button>
+                                    </StackPanel>
+
+
+                                    <!--  WINDOW CONTENT  -->
+                                    <ContentPresenter Grid.Row="1"
+                                                      Grid.RowSpan="2"
+                                                      Grid.Column="0"
+                                                      Grid.ColumnSpan="3"/>
+
+                                    <!--  RESIZE GRIP  -->
+                                    <Grid x:Name="ResizeGrip"
+                                          Grid.Row="2"
+                                          Grid.Column="0"
+                                          Grid.ColumnSpan="3"
+                                          HorizontalAlignment="Right"
+                                          VerticalAlignment="Bottom"
+                                          Background="Transparent"
+                                          Visibility="Collapsed"
+                                          WindowChrome.ResizeGripDirection="BottomRight">
+                                        <Path Width="12"
+                                              Height="12"
+                                              Margin="1"
+                                              Data="F1 M1,10 L3,10 M5,10 L7,10 M9,10 L11,10 M2,9 L2,11 M6,9 L6,11 M10,9 L10,11 M5,6 L7,6 M9,6 L11,6 M6,5 L6,7 M10,5 L10,7 M9,2 L11,2 M10,1 L10,3"
+                                              Stretch="None"
+                                              Stroke="Black"
+                                              StrokeThickness="1" />
+                                    </Grid>
+                                </Grid>
+                            </AdornerDecorator>
+                        </Border>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="WindowState"
+                                 Value="Maximized">
+                            <Setter TargetName="LayoutRoot"
+                                    Property="Margin"
+                                    Value="7" />
+                            <Setter TargetName="Maximize"
+                                    Property="Visibility"
+                                    Value="Collapsed" />
+                            <Setter TargetName="Restore"
+                                    Property="Visibility"
+                                    Value="Visible" />
+                        </Trigger>
+                        <Trigger Property="WindowState"
+                                 Value="Normal">
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="ResizeMode"
+                                           Value="CanResizeWithGrip" />
+                                <Condition Property="WindowState"
+                                           Value="Normal" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="ResizeGrip"
+                                    Property="Visibility"
+                                    Value="Visible" />
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Setter Property="WindowChrome.WindowChrome">
+            <Setter.Value>
+                <WindowChrome CornerRadius="0"
+                              GlassFrameThickness="1"
+                              NonClientFrameEdges="None"
+                              UseAeroCaptionButtons="False" />
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

@@ -1,0 +1,42 @@
+﻿<views:WindowBase x:Class="DicomViewer.UI.Dialogs.DialogWindow"
+                  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                  xmlns:local="clr-namespace:DicomViewer.UI.Dialogs"
+                  xmlns:views="clr-namespace:DicomViewer.UI.Views"
+                  x:Name="This"
+                  WindowStartupLocation="CenterScreen"
+                  Width="450"
+                  Height="300"
+                  Style="{StaticResource WindowStyle}"
+                  Title="{Binding Title}">
+
+    <FrameworkElement.Resources>
+        <ResourceDictionary>
+
+            <local:DialogTemplateSelector x:Key="DialogTemplateSelector">
+
+                <local:DialogTemplateSelector.ProgressDialogDataTemplate>
+                    <DataTemplate>
+                        <local:ProgressDialog />
+                    </DataTemplate>
+                </local:DialogTemplateSelector.ProgressDialogDataTemplate>
+
+                <local:DialogTemplateSelector.UnknownDataTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <TextBlock HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       Text="Error: Unkown dialog view model type." />
+                        </Grid>
+                    </DataTemplate>
+                </local:DialogTemplateSelector.UnknownDataTemplate>
+            </local:DialogTemplateSelector>
+
+        </ResourceDictionary>
+    </FrameworkElement.Resources>
+
+    <Grid>
+        <ContentPresenter Content="{Binding ElementName=This, Path=DataContext}"
+                          ContentTemplateSelector="{StaticResource DialogTemplateSelector}" />
+    </Grid>
+</views:WindowBase>

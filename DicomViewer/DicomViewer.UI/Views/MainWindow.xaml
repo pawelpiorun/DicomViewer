@@ -1,0 +1,117 @@
+﻿<local:WindowBase x:Class="DicomViewer.UI.Views.MainWindow"
+                  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                  xmlns:c="clr-namespace:DicomViewer.UI.Controls"
+                  xmlns:conv="clr-namespace:DicomViewer.UI.Converters"
+                  xmlns:local="clr-namespace:DicomViewer.UI.Views"
+                  WindowState="Maximized"
+                  Title="Bimax Viewer"
+                  SubTitle="{Binding SubTitle}"
+                  WindowStartupLocation="CenterScreen"
+                  Style="{StaticResource WindowStyle}">
+
+    <!-- Resources -->
+    <FrameworkElement.Resources>
+        <ResourceDictionary>
+
+            <conv:ProcessingModeToVisibilityConverter x:Key="ProcessingModeVisConv" />
+
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/DicomViewer.UI;component/Resources/Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </FrameworkElement.Resources>
+
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <WrapPanel Grid.Row="0"
+                   Visibility="{Binding ProcessingMode, Converter={StaticResource ProcessingModeVisConv}, ConverterParameter=Single}">
+
+            <c:IconButton x:Name="OpenButton"
+                          Text="Open file..."
+                          Margin="5"
+                          IconData="{StaticResource OpenGeometry}"
+                          Command="{Binding OpenFileCommand}" />
+
+            <c:IconButton Text="Open series..."
+                          Margin="5"
+                          Command="{Binding OpenDicomSeriesCommand}"
+                          IconData="{StaticResource BrainGeometry}" />
+
+            <WrapPanel Orientation="Horizontal"
+                       Visibility="{Binding IsExperimental, Converter={StaticResource BoolVis}}">
+
+                <c:IconButton ToolTip="Load test image"
+                              Margin="5"
+                              Command="{Binding TestsViewModel.LoadTestImageCommand}"
+                              IconData="{StaticResource WheelsGeometry}" />
+
+                <c:IconButton ToolTip="Load test DICOM"
+                              Margin="5"
+                              Command="{Binding TestsViewModel.LoadTestDicomCommand}"
+                              IconData="{StaticResource WheelsGeometry}" />
+
+                <c:IconButton ToolTip="vtk-9.0/vtk render test"
+                              Margin="5"
+                              Command="{Binding TestVTKCommand}"
+                              IconData="{StaticResource VolumetricGeometry}" />
+
+                <c:IconButton ToolTip="Save DICOM image"
+                              Margin="5"
+                              Command="{Binding TestsViewModel.SaveDicomImageCommand}"
+                              IconData="{StaticResource SaveGeometry}" />
+
+                <c:IconButton ToolTip="Save DICOM series"
+                              Margin="5"
+                              Command="{Binding TestsViewModel.SaveDicomSeriesCommand}"
+                              IconData="{StaticResource SaveGeometry}" />
+            </WrapPanel>
+
+        </WrapPanel>
+
+        <WrapPanel Grid.Row="0"
+                   HorizontalAlignment="Right">
+
+            <c:IconButton ToolTip="Change to/from experimental mode"
+                          Margin="5"
+                          Command="{Binding ChangeExperimentalModeCommand}"
+                          Visibility="{Binding ShowAlphaSwitch, Converter={StaticResource BoolVis}}"
+                          IconData="{StaticResource WheelsGeometry}"
+                          Text="ALPHA" />
+
+            <WrapPanel HorizontalAlignment="Right"
+                       Visibility="{Binding ProcessingMode, Converter={StaticResource ProcessingModeVisConv}, ConverterParameter=Single|Batch|Dual}">
+                <c:IconButton ToolTip="Save batch processing settings"
+                              Margin="5"
+                              Command="{Binding BatchProcessingViewModel.StoreSettingsCommand}"
+                              Visibility="{Binding ProcessingMode, Converter={StaticResource ProcessingModeVisConv}, ConverterParameter=Batch}"
+                              IconData="{StaticResource SaveGeometry}"
+                              Text="Save"
+                              IsEnabled="{Binding BatchProcessingViewModel.HasPendingChanges}" />
+
+                <c:IconButton ToolTip="Go back to home view"
+                              Margin="5"
+                              Command="{Binding BackToHomeCommand}"
+                              IconData="{StaticResource HomeGeometry}"
+                              Text="Home" />
+            </WrapPanel>
+        </WrapPanel>
+
+        <c:HomeSurface Grid.Row="1"
+                       Visibility="{Binding ProcessingMode, Converter={StaticResource ProcessingModeVisConv}, ConverterParameter=Unknown}"/>
+
+        <c:SurfaceControl Grid.Row="1"
+                          Visibility="{Binding ProcessingMode, Converter={StaticResource ProcessingModeVisConv}, ConverterParameter=Single}"/>
+
+        <c:BatchProcessingControl Grid.Row="1"
+                                  Visibility="{Binding ProcessingMode, Converter={StaticResource ProcessingModeVisConv}, ConverterParameter=Batch}" />
+
+        <c:ImageComparationControl Grid.Row="1"
+                                   Visibility="{Binding ProcessingMode, Converter={StaticResource ProcessingModeVisConv}, ConverterParameter=Dual}" />
+
+    </Grid>
+</local:WindowBase>

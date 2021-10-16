@@ -1,0 +1,10 @@
+﻿<UserControl x:Class="DicomViewer.UI.Controls.ImageSurface"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid>
+        <Viewbox x:Name="ViewBox">
+            <Image Margin="5"
+                   Source="{Binding Image.ImageSource}" />
+        </Viewbox>
+    </Grid>
+</UserControl>

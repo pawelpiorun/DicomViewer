@@ -1,0 +1,58 @@
+﻿<UserControl x:Class="DicomViewer.UI.Controls.AlgorithmsControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Name="AlgorithmsRoot">
+    <FrameworkElement.Resources>
+        <ResourceDictionary>
+
+            <DataTemplate x:Key="AlgorithmDataTemplate">
+                <Button x:Name="TheButton"
+                        Margin="5"
+                        HorizontalContentAlignment="Left"
+                        Command="{Binding ElementName=AlgorithmsRoot, Path=DataContext.RunAlgorithmCommand}"
+                        CommandParameter="{Binding}">
+                    <Button.Content>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Grid.Row="0"
+                                       FontWeight="Bold"
+                                       FontSize="14"
+                                       Text="{Binding Title}"
+                                       Margin="5" />
+
+                            <TextBlock Grid.Row="1"
+                                       TextWrapping="Wrap"
+                                       FontSize="10"
+                                       Margin="5,0,5,5"
+                                       Text="{Binding Description}" />
+
+                        </Grid>
+                    </Button.Content>
+                </Button>
+            </DataTemplate>
+
+        </ResourceDictionary>
+    </FrameworkElement.Resources>
+
+    <!-- DATA CONTEXT IS IWITHALGORITHMS -->
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0"
+                   Margin="5"
+                   Style="{DynamicResource Heading1}"
+                   Text="Algorithms" />
+
+        <ItemsControl Grid.Row="1"
+                      ItemsSource="{Binding Algorithms}"
+                      ItemTemplate="{StaticResource AlgorithmDataTemplate}" />
+
+    </Grid>
+</UserControl>

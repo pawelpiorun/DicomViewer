@@ -1,0 +1,52 @@
+﻿<UserControl x:Class="DicomViewer.UI.Controls.PanelControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:help="clr-namespace:DicomViewer.UI.Helpers">
+    <FrameworkElement.Resources>
+        <ResourceDictionary>
+
+            <help:PropertiesTemplateSelector x:Key="PropertiesTemplateSelector">
+                <help:PropertiesTemplateSelector.StringDataTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Column="0"
+                                       Text="{Binding Key}" />
+                            <TextBlock Grid.Column="1"
+                                       Text="{Binding Value}" />
+                        </Grid>
+                    </DataTemplate>
+                </help:PropertiesTemplateSelector.StringDataTemplate>
+            </help:PropertiesTemplateSelector>
+        </ResourceDictionary>
+    </FrameworkElement.Resources>
+
+
+    <Border Margin="1,3,3,3"
+            BorderBrush="DarkGray"
+            BorderThickness="1">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <StackPanel Margin="5"
+                        Grid.Row="0">
+                <TextBlock Style="{DynamicResource Heading1}"
+                           Text="Properties panel"
+                           HorizontalAlignment="Center"/>
+            </StackPanel>
+
+            <Grid Grid.Row="1">
+                <ItemsControl Margin="5"
+                              ItemsSource="{Binding SurfaceViewModel.Properties}"
+                              ItemTemplateSelector="{StaticResource PropertiesTemplateSelector}"/>
+            </Grid>
+        </Grid>
+    </Border>
+</UserControl>

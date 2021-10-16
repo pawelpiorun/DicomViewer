@@ -1,0 +1,28 @@
+﻿<UserControl x:Class="DicomViewer.UI.Controls.PlotControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:c="clr-namespace:DicomViewer.UI.Controls"
+             xmlns:conv="clr-namespace:DicomViewer.UI.Converters"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <FrameworkElement.Resources>
+        <conv:BooleanNotToVisibilityConverter x:Key="BoolNotVis" />
+    </FrameworkElement.Resources>
+    <Grid Margin="15,25,25,15">
+
+        <c:PlotGraph Points="{Binding Points}"
+                     XTick="{Binding XTick}"
+                     YTick="{Binding YTick}"
+                     Bounds="{Binding Bounds}"
+                     Visibility="{Binding HasAnyPoints, Converter={StaticResource BoolVis}}"
+                     CursorPosition="{Binding CursorPosition}" />
+        
+        <TextBlock Text="No plot to display"
+                   Margin="0,25,0,0"
+                   HorizontalAlignment="Center"
+                   Visibility="{Binding HasAnyPoints, Converter={StaticResource BoolNotVis}}" />
+
+    </Grid>
+</UserControl>

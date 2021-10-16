@@ -1,0 +1,16 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/DicomViewer/DicomViewer/.vs/DicomViewer/v16
+/DicomViewer/DicomViewer/obj
+/DicomViewer/DicomViewer.Lib/obj/Debug
+/DicomViewer/DicomViewer.UI/obj/Debug
+/DicomProcessing/x64/Debug
+/DicomViewer/DicomViewer/.vs/DicomViewer/DesignTimeBuild
+/DicomViewer/DicomViewer/bin
+/DicomViewer/DicomViewer/packages
+/DicomViewer/DicomViewer.Lib/bin
+/DicomViewer/DicomViewer.Lib/obj
+/DicomViewer/DicomViewer.UI/bin
+/DicomViewer/DicomViewer.UI/obj

@@ -1,0 +1,183 @@
+﻿ <UserControl x:Class="DicomViewer.UI.Controls.DicomSeriesSurface"
+              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+              xmlns:c="clr-namespace:DicomViewer.UI.Controls"
+              xmlns:conv="clr-namespace:DicomViewer.UI.Converters"
+              xmlns:vm="clr-namespace:DicomViewer.Lib.ViewModels;assembly=DicomViewer.Lib">
+
+    <FrameworkElement.Resources>
+        <ResourceDictionary>
+
+            <conv:DicomSurfaceTypeToVisibilityConverter x:Key="SurfaceTypeToVisConv" />
+            <conv:BooleanNotToVisibilityConverter x:Key="BoolNotVis" />
+
+            <Style x:Key="SwitchSurfaceButtonStyle"
+                   BasedOn="{StaticResource {x:Type c:IconButton}}"
+                   TargetType="{x:Type c:IconButton}">
+                <Setter Property="ToolTip"
+                        Value="Switch between flat and volumetric view" />
+                <Setter Property="BorderThickness"
+                        Value="0" />
+                <Setter Property="Command"
+                        Value="{Binding SwitchSurfaceCommand}" />
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding SurfaceType}"
+                                 Value="Volumetric">
+                        <DataTrigger.Setters>
+                            <Setter Property="IconData"
+                                    Value="{StaticResource FourTilesGeometry}" />
+                        </DataTrigger.Setters>
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding SurfaceType}"
+                                 Value="Flat">
+                        <DataTrigger.Setters>
+                            <Setter Property="IconData"
+                                    Value="{StaticResource Volumetric2Geometry}" />
+                        </DataTrigger.Setters>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+
+            <Style x:Key="ToggleCursorsButtonStyle"
+                   BasedOn="{StaticResource {x:Type c:IconButton}}"
+                   TargetType="{x:Type c:IconButton}">
+                <Setter Property="ToolTip"
+                        Value="Show/hide cursors on reslice images" />
+                <Setter Property="BorderThickness"
+                        Value="0" />
+                <Setter Property="Command"
+                        Value="{Binding SwitchCursorsCommand}" />
+                <Setter Property="IconData"
+                        Value="{StaticResource TargetGeometry}" />
+
+                <Setter Property="Visibility"
+                        Value="Collapsed" />
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding SurfaceType}"
+                                 Value="Flat">
+                        <DataTrigger.Setters>
+                            <Setter Property="Visibility"
+                                    Value="{Binding IsAlpha, Converter={StaticResource BoolVisConv}}" />
+                        </DataTrigger.Setters>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+
+            <Style x:Key="ResetCursorsButtonStyle"
+                   BasedOn="{StaticResource {x:Type c:IconButton}}"
+                   TargetType="{x:Type c:IconButton}">
+                <Setter Property="ToolTip"
+                        Value="Reset cursors on reslice images" />
+                <Setter Property="BorderThickness"
+                        Value="0" />
+                <Setter Property="Command"
+                        Value="{Binding ResetCursorsCommand}" />
+                <Setter Property="IconData"
+                        Value="{StaticResource ResetGeometry}" />
+
+                <Setter Property="Visibility"
+                        Value="Collapsed" />
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding SurfaceType}"
+                                 Value="Flat">
+                        <DataTrigger.Setters>
+                            <Setter Property="Visibility"
+                                    Value="Visible" />
+                        </DataTrigger.Setters>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+
+        </ResourceDictionary>
+    </FrameworkElement.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+
+        <Grid x:Name="LeftGrid"
+              Grid.Column="0"
+              Width="250"
+              Visibility="{Binding IsSeriesLoaded, Converter={StaticResource BoolVis}}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <ScrollViewer Grid.Row="0"
+                          Margin="0,0,0,5"
+                          VerticalScrollBarVisibility="Auto">
+                <c:AlgorithmsControl />
+            </ScrollViewer>
+
+            <Separator Grid.Row="1"
+                       Margin="5"/>
+
+            <c:PresetsControl Grid.Row="2"
+                              DataContext="{Binding PresetsViewModel}" />
+
+            <Separator Grid.Row="3"
+                       Margin="5"/>
+
+            <ScrollViewer Grid.Row="4"
+                          Margin="0,5,0,0"
+                          VerticalScrollBarVisibility="Auto"
+                          DataContext="{Binding ResultsViewModel}"
+                          Visibility="{Binding AreResultsPresent, Converter={StaticResource BoolVis}}">
+                <c:ResultsControl />
+            </ScrollViewer>
+
+        </Grid>
+
+        <Grid Grid.Column="1"
+              Margin="5,0">
+
+            <Border BorderBrush="Black"
+                    BorderThickness="2"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch">
+
+                <Grid>
+                    <Grid Visibility="{Binding AirVolumeResult.ShouldShowResult, Converter={StaticResource BoolNotVis}}">
+                        <c:DicomSeriesFlatSurface Visibility="{Binding SurfaceType, Converter={StaticResource SurfaceTypeToVisConv}, ConverterParameter=Flat}" />
+                        <c:DicomSeries3DSurface Visibility="{Binding SurfaceType, Converter={StaticResource SurfaceTypeToVisConv}, ConverterParameter=Volumetric}" />
+                    </Grid>
+                    <Grid>
+                        <c:AirVolumeFlatSurfaceResult Visibility="{Binding AirVolumeResult.ShouldShowResult, Converter={StaticResource BoolVis}}" />
+                    </Grid>
+                </Grid>
+            </Border>
+
+        </Grid>
+
+        <Grid x:Name="ToolsGrid"
+              Grid.Column="2"
+              Visibility="{Binding IsSeriesLoaded, Converter={StaticResource BoolVis}}">
+
+            <WrapPanel HorizontalAlignment="Right"
+                       Orientation="Vertical">
+
+                <c:IconButton Style="{StaticResource SwitchSurfaceButtonStyle}" />
+
+                <c:IconButton Style="{StaticResource ToggleCursorsButtonStyle}" />
+                
+                <c:IconButton Style="{StaticResource ResetCursorsButtonStyle}" />
+
+                <c:IconButton Visibility="{Binding AirVolumeResult.CanShowResults, Converter={StaticResource BoolVis}}"
+                              BorderThickness="0"
+                              ToolTip="Show air volume results."
+                              IconData="{StaticResource WheelsGeometry}"
+                              Command="{Binding AirVolumeResult.ShowAirVolumeResultsCommand}"/>
+
+            </WrapPanel>
+        </Grid>
+
+    </Grid>
+
+</UserControl>
