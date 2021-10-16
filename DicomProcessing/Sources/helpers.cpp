@@ -33,7 +33,7 @@ namespace helpers
 		char buffer[256];
 		strncpy(buffer, appData, sizeof(buffer));
 
-		char* subFolder = "\\BimaxViewer";
+		char* subFolder = "\\DicomViewer";
 		strncat(buffer, subFolder, sizeof(buffer));
 
 		auto status = _mkdir(buffer);

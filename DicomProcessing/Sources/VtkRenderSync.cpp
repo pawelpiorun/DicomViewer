@@ -1,4 +1,4 @@
-#include "vtk-9.0/vtkRenderSync.h"
+#include "vtkRenderSync.h"
 #include "vtk-9.0/vtkPlane.h"
 #include "vtk-9.0/vtkImageData.h"
 #include "vtk-9.0/vtkLookupTable.h"

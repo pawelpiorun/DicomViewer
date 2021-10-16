@@ -1,4 +1,4 @@
-#include "vtk-9.0/vtkRender.h"
+#include "vtkRender.h"
 #include "vtk-9.0/vtkImageMapToWindowLevelColors.h"
 #include "vtk-9.0/vtkLookupTable.h"
 #include "vtk-9.0/vtkMatrix4x4.h"

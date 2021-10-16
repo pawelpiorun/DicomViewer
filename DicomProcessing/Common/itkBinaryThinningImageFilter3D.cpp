@@ -1,5 +1,5 @@
 #include "common.h"
-#include "ITK-5.1/itkBinaryThinningImageFilter3D.h"
+#include "itkBinaryThinningImageFilter3D.h"
 #include "ITK-5.1/itkImageRegionConstIterator.h"
 #include "ITK-5.1/itkImageRegionIterator.h"
 #include "ITK-5.1/itkNeighborhoodIterator.h"

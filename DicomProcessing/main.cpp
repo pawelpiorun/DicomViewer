@@ -1,4 +1,4 @@
-#include "vtk-9.0/vtkRender.h"
+#include "vtkRender.h"
 #include "DicomProcessing.h"
 #include "AirVolumeAlgorithm.h"
 #include "MandibularCondylesAlgorithm.h"
@@ -184,7 +184,7 @@ void saveDicomImageWithSpacing(DicomImage* dicomImage, std::string outputPath)
 void saveImageWithLine(DicomImage* image, std::vector<double> line)
 {
 	auto tolerance = line[0] < 1 ? 1 : line[0] < 5 ? 2 : line[0] < 20 ? 3 : 4;
-	using IteratorType = itk::ImageRegionIterator<DicomImageType>;
+	using IteratorType = itk::ImageRegionIteratorWithIndex<DicomImageType>;
 	auto itkImage = image->GetItkDicomImage();
 	auto it = IteratorType(itkImage, itkImage->GetLargestPossibleRegion());
 	it.GoToBegin();

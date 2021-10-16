@@ -1,4 +1,4 @@
-#include "vtk-9.0/vtkScrollImageViewerInteractorStyle.h"
+#include "vtkScrollImageViewerInteractorStyle.h"
 
 vtkStandardNewMacro(vtkScrollImageViewerInteractorStyle);
 
