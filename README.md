@@ -7,8 +7,8 @@ DICOM images and volumes viewer with advanced processing infrastructure
 - VTK (C++)
 
 ## Structure:
-- BimaxViewer - WPF app with business logic of the application
-- BimaxProcessing - ITK & VTK logic for processing and rendering data
+- DicomViewer - WPF app with business logic of the application
+- DicomProcessing - ITK & VTK logic for processing and rendering data
 
 The app is developed with MVVM pattern sense. PInvoke was used to integrate C++ and C# libraries.
 
